@@ -1,5 +1,6 @@
 package com.springboot.restmysql.service;
 
+import com.fasterxml.jackson.databind.node.TextNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -53,4 +54,12 @@ public class ServiceLatihanQueryIN {
         return query;
     }
 
+    public List findFromRequestBody(int id) {
+        String query = "select * from latihan where id = :id";
+        MapSqlParameterSource param = new MapSqlParameterSource();
+        param.addValue("id", id);
+
+        List result = jt.queryForList(query, param);
+        return result;
+    }
 }
